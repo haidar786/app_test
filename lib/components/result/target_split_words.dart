@@ -18,20 +18,27 @@ class ResultPageTargetSplitWordsList extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: DragTarget<int>(
             onAccept: (data) {
-              final shuffleState = context.read<ShuffleBloc>().state;
-              final newOrderList = <String>[];
-              newOrderList.addAll(state.orderList);
-              newOrderList.add(shuffleState.randomList[data]);
-              context
-                  .read<OrderBloc>()
-                  .add(OrderListChanged(orderedList: newOrderList));
-              // shuffleState.randomList.removeAt(data);
-              final newShuffleList = <String>[];
-              newShuffleList.addAll(shuffleState.randomList);
-              newShuffleList.removeAt(data);
-              context.read<ShuffleBloc>().add(ShuffleListChanged(
-                  randomList: newShuffleList,
-                  originalRandomList: shuffleState.originalRandomList));
+              try {
+                final shuffleState = context.read<ShuffleBloc>().state;
+                final newOrderList = <String>[];
+                newOrderList.addAll(state.orderList);
+                if (shuffleState.randomList.isNotEmpty) {
+                  newOrderList.add(shuffleState.randomList[data]);
+                }
+                context
+                    .read<OrderBloc>()
+                    .add(OrderListChanged(orderedList: newOrderList));
+                if (shuffleState.randomList.isNotEmpty) {
+                  final newShuffleList = <String>[];
+                  newShuffleList.addAll(shuffleState.randomList);
+                  newShuffleList.removeAt(data);
+                  context.read<ShuffleBloc>().add(ShuffleListChanged(
+                      randomList: newShuffleList,
+                      originalRandomList: shuffleState.originalRandomList));
+                }
+              } catch (e) {
+                print(e);
+              }
             },
             builder: (BuildContext context, List<Object?> candidateData,
                 List<dynamic> rejectedData) {
@@ -44,6 +51,7 @@ class ResultPageTargetSplitWordsList extends StatelessWidget {
                 child: Wrap(
                   children: state.orderList.map((element) {
                     return Draggable(
+                      data: 1,
                       feedback: Material(
                         child: Container(
                             padding: const EdgeInsets.all(8.0),
