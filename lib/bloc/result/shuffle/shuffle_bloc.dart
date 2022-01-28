@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ShuffleBloc extends Bloc<ShuffleBlocEvent, ShuffleBlocState> {
   ShuffleBloc(List<String> randomList)
       : super(ShuffleBlocState(
-            randomList: randomList, originalRandomList: randomList)) {
+            randomList: randomList, checkRandomList: const <int>[])) {
     on<ShuffleListChanged>(_onRandomListChanged);
   }
 
@@ -13,6 +13,6 @@ class ShuffleBloc extends Bloc<ShuffleBlocEvent, ShuffleBlocState> {
       ShuffleListChanged event, Emitter<ShuffleBlocState> emit) {
     emit(ShuffleBlocState(
         randomList: event.randomList,
-        originalRandomList: event.originalRandomList));
+        checkRandomList: event.checkRandomList));
   }
 }

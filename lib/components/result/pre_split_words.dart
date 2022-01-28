@@ -11,33 +11,50 @@ class ResultPagePreSplitWordsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ShuffleBloc, ShuffleBlocState>(
       builder: (BuildContext context, state) {
+        print(state.checkRandomList.length);
         return Center(
           child: Wrap(
             spacing: 20.0,
             children: List.generate(
                 state.randomList.length,
-                (index) => Draggable(
-                      data: DragData(
-                          index: index,
-                          text: state.randomList[index],
-                          isSwap: false),
-                      feedback: Material(
+                (index) => !state.checkRandomList.contains(index)
+                    ? Draggable(
+                        data: DragData(
+                            index: index,
+                            text: state.randomList[index],
+                            isSwap: false),
+                        feedback: Material(
+                          child: Container(
+                              padding: const EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  color: Colors.green.shade50,
+                                  border: Border.all()),
+                              child: Text(state.randomList[index])),
+                        ),
                         child: Container(
                             padding: const EdgeInsets.all(8.0),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20.0),
-                                color: Colors.green.shade50,
+                                color: Colors.red.shade50,
                                 border: Border.all()),
                             child: Text(state.randomList[index])),
-                      ),
-                      child: Container(
+                        childWhenDragging: Container(
                           padding: const EdgeInsets.all(8.0),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20.0),
                               color: Colors.red.shade50,
                               border: Border.all()),
-                          child: Text(state.randomList[index])),
-                      childWhenDragging: Container(
+                          child: Visibility(
+                            visible: false,
+                            maintainSize: true,
+                            maintainAnimation: true,
+                            maintainState: true,
+                            child: Text(state.randomList[index]),
+                          ),
+                        ),
+                      )
+                    : Container(
                         padding: const EdgeInsets.all(8.0),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20.0),
@@ -50,8 +67,7 @@ class ResultPagePreSplitWordsList extends StatelessWidget {
                           maintainState: true,
                           child: Text(state.randomList[index]),
                         ),
-                      ),
-                    )),
+                      )),
           ),
         );
       },

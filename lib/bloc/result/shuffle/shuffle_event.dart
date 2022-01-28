@@ -9,11 +9,11 @@ abstract class ShuffleBlocEvent extends Equatable {
 
 class ShuffleListChanged extends ShuffleBlocEvent {
   const ShuffleListChanged(
-      {required this.randomList, required this.originalRandomList});
+      {required this.randomList, required this.checkRandomList});
 
   final List<String> randomList;
-  final List<String> originalRandomList;
+  final List<int> checkRandomList;
 
   @override
-  List<Object> get props => [randomList, originalRandomList];
+  List<Object> get props => [randomList, checkRandomList];
 }

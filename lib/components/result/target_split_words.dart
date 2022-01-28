@@ -18,27 +18,25 @@ class ResultPageTargetSplitWordsList extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: DragTarget<DragData>(
-            onAccept: (data) {
-              try {
+            onAcceptWithDetails: (details) {
+              if (details.data.isSwap) {
+                print(details.data.isSwap);
+                print(details.data.index);
+                print(details.data.text);
+              } else {
                 final shuffleState = context.read<ShuffleBloc>().state;
                 final newOrderList = <String>[];
                 newOrderList.addAll(state.orderList);
-                if (shuffleState.randomList.isNotEmpty) {
-                  newOrderList.add(shuffleState.randomList[data.index]);
-                }
+                newOrderList.add(shuffleState.randomList[details.data.index]);
                 context
                     .read<OrderBloc>()
                     .add(OrderListChanged(orderedList: newOrderList));
-                if (shuffleState.randomList.isNotEmpty) {
-                  final newShuffleList = <String>[];
-                  newShuffleList.addAll(shuffleState.randomList);
-                  newShuffleList.removeAt(data.index);
-                  context.read<ShuffleBloc>().add(ShuffleListChanged(
-                      randomList: newShuffleList,
-                      originalRandomList: shuffleState.originalRandomList));
-                }
-              } catch (e) {
-                print(e);
+                final newCheckList = <int>[];
+                newCheckList.addAll(shuffleState.checkRandomList);
+                newCheckList.add(details.data.index);
+                context.read<ShuffleBloc>().add(ShuffleListChanged(
+                    randomList: shuffleState.randomList,
+                    checkRandomList: newCheckList));
               }
             },
             builder: (BuildContext context, List<Object?> candidateData,

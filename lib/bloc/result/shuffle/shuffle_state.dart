@@ -2,11 +2,11 @@ import 'package:equatable/equatable.dart';
 
 class ShuffleBlocState extends Equatable {
   const ShuffleBlocState(
-      {required this.randomList, required this.originalRandomList});
+      {required this.randomList, required this.checkRandomList});
 
   final List<String> randomList;
-  final List<String> originalRandomList;
+  final List<int> checkRandomList;
 
   @override
-  List<Object> get props => [randomList];
+  List<Object> get props => [randomList, checkRandomList];
 }
