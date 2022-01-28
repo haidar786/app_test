@@ -18,16 +18,19 @@ class ResultPageTargetSplitWordsList extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: DragTarget<int>(
             onAccept: (data) {
-              // desiredList.add(randomList[data]);
-              // randomList.removeAt(data);
               final shuffleState = context.read<ShuffleBloc>().state;
-              state.orderList.add(shuffleState.randomList[data]);
-              shuffleState.randomList.removeAt(data);
+              final newOrderList = <String>[];
+              newOrderList.addAll(state.orderList);
+              newOrderList.add(shuffleState.randomList[data]);
               context
                   .read<OrderBloc>()
-                  .add(OrderListChanged(orderedList: state.orderList));
+                  .add(OrderListChanged(orderedList: newOrderList));
+              // shuffleState.randomList.removeAt(data);
+              final newShuffleList = <String>[];
+              newShuffleList.addAll(shuffleState.randomList);
+              newShuffleList.removeAt(data);
               context.read<ShuffleBloc>().add(ShuffleListChanged(
-                  randomList: shuffleState.randomList,
+                  randomList: newShuffleList,
                   originalRandomList: shuffleState.originalRandomList));
             },
             builder: (BuildContext context, List<Object?> candidateData,
