@@ -1,5 +1,6 @@
 import 'package:app_test/bloc/result/order/order_bloc.dart';
 import 'package:app_test/bloc/result/shuffle/shuffle_bloc.dart';
+import 'package:app_test/components/result/check_button.dart';
 import 'package:app_test/components/result/pre_split_words.dart';
 import 'package:app_test/components/result/target_split_words.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class _ResultPageState extends State<ResultPage> {
             return ShuffleBloc(splitList);
           }),
           BlocProvider(create: (_) {
-            return OrderBloc();
+            return OrderBloc(widget.sentence);
           }),
         ],
         child: Scaffold(
@@ -35,7 +36,9 @@ class _ResultPageState extends State<ResultPage> {
               children: const [
                 ResultPageTargetSplitWordsList(),
                 SizedBox(height: 20.0),
-                ResultPagePreSplitWordsList()
+                ResultPagePreSplitWordsList(),
+                SizedBox(height: 20.0),
+                ResultPageCheckButton()
               ],
             )));
   }

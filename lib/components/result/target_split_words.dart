@@ -28,9 +28,9 @@ class ResultPageTargetSplitWordsList extends StatelessWidget {
                 final newOrderList = <String>[];
                 newOrderList.addAll(state.orderList);
                 newOrderList.add(shuffleState.randomList[details.data.index]);
-                context
-                    .read<OrderBloc>()
-                    .add(OrderListChanged(orderedList: newOrderList));
+                context.read<OrderBloc>().add(OrderListChanged(
+                    orderedList: newOrderList,
+                    originalSentence: state.originalSentence));
                 final newCheckList = <int>[];
                 newCheckList.addAll(shuffleState.checkRandomList);
                 newCheckList.add(details.data.index);

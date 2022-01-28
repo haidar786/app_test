@@ -8,10 +8,12 @@ abstract class OrderBlocEvent extends Equatable {
 }
 
 class OrderListChanged extends OrderBlocEvent {
-  const OrderListChanged({required this.orderedList});
+  const OrderListChanged(
+      {required this.orderedList, required this.originalSentence});
 
   final List<String> orderedList;
+  final String originalSentence;
 
   @override
-  List<Object> get props => [orderedList];
+  List<Object> get props => [orderedList, originalSentence];
 }
