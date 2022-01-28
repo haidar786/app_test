@@ -13,11 +13,11 @@ class HomePageSentenceTextField extends StatelessWidget {
       child: TextFormField(
         onSaved: (text) {
           if (text != null) {
-            sentenceFormModel.sentence = text;
+            sentenceFormModel.sentence = text.trim();
           }
         },
         validator: (text) {
-          if (text == null || text == "") {
+          if (text == null || text.trim() == "") {
             return "Please enter sentence";
           }
           return null;

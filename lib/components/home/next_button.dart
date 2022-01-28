@@ -21,7 +21,7 @@ class HomePageNextButton extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      ResultPage(sentence: sentenceFormModel.sentence)));
+                      ResultPage(sentence: sentenceFormModel.sentence.trim())));
         }
       },
     );
