@@ -11,7 +11,6 @@ class ResultPagePreSplitWordsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ShuffleBloc, ShuffleBlocState>(
       builder: (BuildContext context, state) {
-        print(state.checkRandomList.length);
         return Center(
           child: Wrap(
             spacing: 20.0,

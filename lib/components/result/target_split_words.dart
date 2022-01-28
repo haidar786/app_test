@@ -19,6 +19,7 @@ class ResultPageTargetSplitWordsList extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: DragTarget<DragData>(
             onAcceptWithDetails: (details) {
+              print(details.offset);
               if (details.data.isSwap) {
                 print(details.data.isSwap);
                 print(details.data.index);
