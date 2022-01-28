@@ -1,5 +1,6 @@
 import 'package:app_test/bloc/result/shuffle/shuffle_bloc.dart';
 import 'package:app_test/bloc/result/shuffle/shuffle_state.dart';
+import 'package:app_test/model/drag_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,7 +17,10 @@ class ResultPagePreSplitWordsList extends StatelessWidget {
             children: List.generate(
                 state.randomList.length,
                 (index) => Draggable(
-                      data: index,
+                      data: DragData(
+                          index: index,
+                          text: state.randomList[index],
+                          isSwap: false),
                       feedback: Material(
                         child: Container(
                             padding: const EdgeInsets.all(8.0),

@@ -8,18 +8,21 @@ class HomePageSentenceTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      onSaved: (text) {
-        if (text != null) {
-          sentenceFormModel.sentence = text;
-        }
-      },
-      validator: (text) {
-        if (text == null || text == "") {
-          return "Please enter sentence";
-        }
-        return null;
-      },
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: TextFormField(
+        onSaved: (text) {
+          if (text != null) {
+            sentenceFormModel.sentence = text;
+          }
+        },
+        validator: (text) {
+          if (text == null || text == "") {
+            return "Please enter sentence";
+          }
+          return null;
+        },
+      ),
     );
   }
 }

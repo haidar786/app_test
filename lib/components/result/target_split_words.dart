@@ -3,6 +3,7 @@ import 'package:app_test/bloc/result/order/shuffle_event.dart';
 import 'package:app_test/bloc/result/order/shuffle_state.dart';
 import 'package:app_test/bloc/result/shuffle/shuffle_bloc.dart';
 import 'package:app_test/bloc/result/shuffle/shuffle_event.dart';
+import 'package:app_test/model/drag_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,14 +17,14 @@ class ResultPageTargetSplitWordsList extends StatelessWidget {
       return Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: DragTarget<int>(
+          child: DragTarget<DragData>(
             onAccept: (data) {
               try {
                 final shuffleState = context.read<ShuffleBloc>().state;
                 final newOrderList = <String>[];
                 newOrderList.addAll(state.orderList);
                 if (shuffleState.randomList.isNotEmpty) {
-                  newOrderList.add(shuffleState.randomList[data]);
+                  newOrderList.add(shuffleState.randomList[data.index]);
                 }
                 context
                     .read<OrderBloc>()
@@ -31,7 +32,7 @@ class ResultPageTargetSplitWordsList extends StatelessWidget {
                 if (shuffleState.randomList.isNotEmpty) {
                   final newShuffleList = <String>[];
                   newShuffleList.addAll(shuffleState.randomList);
-                  newShuffleList.removeAt(data);
+                  newShuffleList.removeAt(data.index);
                   context.read<ShuffleBloc>().add(ShuffleListChanged(
                       randomList: newShuffleList,
                       originalRandomList: shuffleState.originalRandomList));
@@ -51,7 +52,10 @@ class ResultPageTargetSplitWordsList extends StatelessWidget {
                 child: Wrap(
                   children: List.generate(state.orderList.length, (index) {
                     return Draggable(
-                      data: index,
+                      data: DragData(
+                          isSwap: true,
+                          text: state.orderList[index],
+                          index: index),
                       feedback: Material(
                         child: Container(
                             padding: const EdgeInsets.all(8.0),

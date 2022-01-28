@@ -28,14 +28,15 @@ class _ResultPageState extends State<ResultPage> {
           }),
         ],
         child: Scaffold(
+            appBar: AppBar(),
             body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
-            ResultPageTargetSplitWordsList(),
-            SizedBox(height: 20.0),
-            ResultPagePreSplitWordsList()
-          ],
-        )));
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: const [
+                ResultPageTargetSplitWordsList(),
+                SizedBox(height: 20.0),
+                ResultPagePreSplitWordsList()
+              ],
+            )));
   }
 }
