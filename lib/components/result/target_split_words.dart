@@ -49,27 +49,30 @@ class ResultPageTargetSplitWordsList extends StatelessWidget {
                     border: Border.all()),
                 child: Wrap(
                   children: List.generate(state.orderList.length, (index) {
-                    return Draggable(
-                      data: DragData(
-                          isSwap: true,
-                          text: state.orderList[index],
-                          index: index),
-                      feedback: Material(
+                    return Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Draggable(
+                        data: DragData(
+                            isSwap: true,
+                            text: state.orderList[index],
+                            index: index),
+                        feedback: Material(
+                          child: Container(
+                              padding: const EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  color: Colors.green.shade50,
+                                  border: Border.all()),
+                              child: Text(state.orderList[index])),
+                        ),
                         child: Container(
                             padding: const EdgeInsets.all(8.0),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20.0),
-                                color: Colors.green.shade50,
+                                color: Colors.red.shade50,
                                 border: Border.all()),
                             child: Text(state.orderList[index])),
                       ),
-                      child: Container(
-                          padding: const EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20.0),
-                              color: Colors.red.shade50,
-                              border: Border.all()),
-                          child: Text(state.orderList[index])),
                     );
                   }).toList(),
                 ),
