@@ -49,9 +49,9 @@ class ResultPageTargetSplitWordsList extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20.0),
                     border: Border.all()),
                 child: Wrap(
-                  children: state.orderList.map((element) {
+                  children: List.generate(state.orderList.length, (index) {
                     return Draggable(
-                      data: 1,
+                      data: index,
                       feedback: Material(
                         child: Container(
                             padding: const EdgeInsets.all(8.0),
@@ -59,7 +59,7 @@ class ResultPageTargetSplitWordsList extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(20.0),
                                 color: Colors.green.shade50,
                                 border: Border.all()),
-                            child: Text(element)),
+                            child: Text(state.orderList[index])),
                       ),
                       child: Container(
                           padding: const EdgeInsets.all(8.0),
@@ -67,7 +67,7 @@ class ResultPageTargetSplitWordsList extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20.0),
                               color: Colors.red.shade50,
                               border: Border.all()),
-                          child: Text(element)),
+                          child: Text(state.orderList[index])),
                     );
                   }).toList(),
                 ),
